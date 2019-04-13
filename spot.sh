@@ -161,9 +161,7 @@ fi
 # run search
 eval "find $dir $findopt -type f $exclude -print0" \
   | GREP_COLOR="1;33;40" xargs -0 grep "${grepopt[@]}" -e "$@" \
-  | sed "s/^\([^:]*:\)\(.*\)/  \\
-$cyan\1$reset  \\
-\2 /" \
+  | sed "s/^\([^:]*:\)\(.*\)/$cyan\1$reset\2 /" \
   | awk -v linenums=$linenums -v reset="$(tput sgr0)" -v colors=$colors -v mline=$mline '{
   if (length($0) > mline) {
     # Get line number string
